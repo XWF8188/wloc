@@ -70,6 +70,25 @@ https://raw.githubusercontent.com/Yu9191/wloc/refs/heads/main/modules/wloc.lpx
 </details>
 
 <details>
+<summary><b>取消虚拟定位 / 恢复真实定位</b></summary>
+
+**方法一：关闭或删除模块**（推荐）
+
+关闭模块后脚本不再拦截 WLOC 请求，系统自动恢复真实定位。iOS 26+ 需要重启设备清除定位缓存。
+
+**方法二：仅清除已保存的坐标**
+
+如果想保留模块但清除在线选点写入的坐标（回退到模块参数或默认值），需要在代理工具中删除持久化数据，字段名为 `wloc_settings`：
+
+- **Surge** — 脚本编辑器运行: `$persistentStore.write(null, "wloc_settings")`
+- **Quantumult X** — 运行: `$prefs.removeValueForKey("wloc_settings")`
+- **Loon** — 运行: `$persistentStore.write(null, "wloc_settings")`
+
+清除后重启设备即可生效。
+
+</details>
+
+<details>
 <summary><b>注意事项</b></summary>
 
 - 需要 MITM 证书信任 `gs-loc.apple.com` 和 `gs-loc-cn.apple.com`
